@@ -1,11 +1,10 @@
 package Main;
 
-import java.util.Set;
-import java.util.TreeSet;
-
 import Models.Contacto;
 import Utils.ContactoComparator;
 import Utils.Sets;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class App {
     private static Set<Contacto> agenda;
@@ -31,6 +30,9 @@ public class App {
         runLinkedHashSet();
         runTreeSet();
         runTreeSetConComparador();
+
+        System.out.println("\n----- Prueba de Agenda Contactos -----");
+        runEjercicio();
     }
 
     // Métodos para manejar la agenda
@@ -44,6 +46,48 @@ public class App {
 
     public static Set<Contacto> obtenerContactos() {
         return agenda;
+    } 
+
+    public static void runEjercicio(){
+        //Ser<Contacto> agenda = new TransSet<>(new ContactoComparator(x));
+
+        Contacto c1 = new Contacto("Pedro", "Lopez", "1234567809");
+        Contacto c2 = new Contacto("Pedro", "Lopez", "9876543210");
+
+        // Imprimimos los contactos
+        System.out.println(c1);
+        System.out.println(c2);
+
+        // Comparación por referencia de memoria
+        System.out.println("\nComparación por referencia de memoria:");
+        boolean comparacionReferencia = c1 == c2;
+        System.out.println(comparacionReferencia);
+        System.out.println("c1:"+ c1 + "== c2:" + c2+ "=" + comparacionReferencia);
+
+        // Comparación usando equals
+        System.out.println("\nComparación usando equals:");
+        System.out.println(c1.equals(c2));
+        boolean comparacionEquals = c1.equals(c2);
+        System.out.println(comparacionEquals);
+        System.out.println("c1: " + c1 + " == c2: " + c2 + " = " + comparacionEquals);
+
+        // Comparación de hashCode
+        System.out.println("\nComparación de hashCode:");
+        boolean comparacionHashCode = c1.hashCode() == c2.hashCode();
+        System.out.println(comparacionHashCode);
+        System.out.println("c1: " + c1.hashCode() + " == c2: " + c2.hashCode() + " = " + comparacionHashCode);
+
+        Set<Contacto> agenda = new TreeSet<>(new ContactoComparator());
+
+        agenda.add(new Contacto("Pedro", "Lopez", "222222222222"));
+        agenda.add(new Contacto("Luis", "Perez", "333333333333"));
+        agenda.add(new Contacto("Ana", "Perez", "444444444444"));
+        agenda.add(new Contacto("Pedro", "Lopez", "555555555555"));
+
+        System.out.println("Contacos en la agenda (ordenada)");
+        for (Contacto contacto : agenda) {
+            System.out.println(contacto);
+        }
     }
 
     public static void runHashSet() {

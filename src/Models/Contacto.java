@@ -1,9 +1,9 @@
 package Models;
 
 public class Contacto {
-    private String nombre;
-    private String apellido;
-    private String telefono;
+    private final String nombre;
+    private final String apellido;
+    private final String telefono;
 
     public Contacto(String nombre, String apellido, String telefono) {
         this.nombre = nombre;
@@ -36,11 +36,12 @@ public class Contacto {
             return false;
         Contacto contacto = (Contacto) obj;
         return nombre.equalsIgnoreCase(contacto.nombre) &&
-                apellido.equalsIgnoreCase(contacto.apellido);
+            apellido.equalsIgnoreCase(contacto.apellido) &&
+               telefono.equals(contacto.telefono);  // Agregamos comparación del teléfono
     }
 
     @Override
     public int hashCode() {
-        return (nombre.toLowerCase() + apellido.toLowerCase()).hashCode();
+        return (nombre.toLowerCase() + apellido.toLowerCase() + telefono).hashCode();  // Incluimos teléfono en el hash
     }
 }
